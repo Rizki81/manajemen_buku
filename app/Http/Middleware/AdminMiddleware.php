@@ -17,8 +17,8 @@ class AdminMiddleware
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'Akses ditolak. Hanya admin yang dapat mengakses halaman ini.');
+        if (!Auth::user()->isAdmin()) {
+            abort(403, 'Akses ditolak. Hanya admin yang dapat mengakses halaman ini. Role: ' . Auth::user()->role);
         }
 
         return $next($request);
