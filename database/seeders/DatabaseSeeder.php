@@ -17,19 +17,23 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('admin123'),
-            'role' => 'admin',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('admin123'),
+                'role' => 'admin',
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Pengunjung',
-            'email' => 'pengunjung@example.com',
-            'password' => bcrypt('pengunjung123'),
-            'role' => 'pengunjung',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'pengunjung@example.com'],
+            [
+                'name' => 'Pengunjung',
+                'password' => bcrypt('pengunjung123'),
+                'role' => 'pengunjung',
+            ]
+        );
 
         // sample kategori & buku
         $kategori = \App\Models\Category::create(['nama_kategori' => 'Fiksi']);
